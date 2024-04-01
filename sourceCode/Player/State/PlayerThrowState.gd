@@ -89,9 +89,8 @@ func _process(delta):
 		mouse_circle.set_value(mouse_circle_posi,circle_R)
 		
 		#投げる処理
-		if _player.isThrowing && Input.is_action_just_released("mouse_left"):
+		if _player.isThrowing && Input.is_action_just_released("throw"):
 			# ドラッグ終了時(ボタンを離したとき)
-			
 			#画面の内側にしか投げられないようにする
 			if (_player.leftP && direction.x>0)||(!_player.leftP && direction.x<0): #左プレイヤーの時は右方向に、右プレイヤーの時は左方向にしか投げない
 				_player.throw(_player.throw_slipper_type, force, direction)
@@ -107,7 +106,10 @@ func _process(delta):
 func start_input()->bool: #NPCを作るために開始の判定を移動しました
 	#スペースキーなどを押しているうえでマウスボタンを押したときに(ドラック開始時)した時に投げられるようにする
 	#ただマウスをドラックしたときにするとマウスでボタンを押したときなどにも反応すると思うのでスペースキーと同時押しにしました
-	if  Input.is_action_pressed("throw_start"): #throw_Count < throw_MaxN
+	if  Input.is_action_pressed("throw_start") || Input.is_action_just_released("throw_start"):
+		if(Input.is_action_just_released("throw_start")):
+			print("離した")
+		#離した瞬間も加えることで始めるボタンと投げるボタンを同時に話しても機能するようにする
 		if Input.is_action_just_pressed("throw"):
 			return true
 	else: #マウスのボタンを離すより先にスペースキーが離されたとき入力をキャンセルする

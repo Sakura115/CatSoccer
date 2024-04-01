@@ -93,18 +93,7 @@ func _process(delta):
 
 
 func throw(slipper_ob,force:float=throw_MaxForce,direction:Vector2=Vector2(1,0)): #スリッパを投げる
-	#スリッパの生成
-	#var slipper = slipper_ob.instantiate()
-	
-	#投げたプレイヤーに応じてスリッパの名前を変える
-	#if leftP:
-	#	slipper.name="L_"+slipper.name
-	#else:
-	#	slipper.name="R_"+slipper.name
-	
-	#add_child_avoid_error(slipper,slipper_parent)	
-	#slipper.thrown(force,curve,direction)
-	#slipper.global_position = global_position + throw_slipper_posi
+
 	skill_point-=Consumed_sp
 	emit_signal("throw_slipper",slipper_ob,force,direction,global_position + throw_slipper_posi)
 	
